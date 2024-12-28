@@ -15,7 +15,7 @@ available_browsers = {
 }
 
 # GitHub repository URL (replace with your actual repository URL)
-github_repo_url = "https://github.com/yourusername/your-repository"  # Replace with your actual GitHub URL
+github_repo_url = "https://github.com/Arthur2013665/Python-web-browser/tree/main"  # Replace with your actual GitHub URL
 
 # Function to log errors to a file
 def log_error(message):
@@ -42,22 +42,32 @@ def get_browser(browser_choice):
         log_error(error_message)
         exit(1)  # Exit if browser isn't found or choice is invalid
 
-# Prompt the user to select a browser
-print("Select a browser:")
-for key, browser in available_browsers.items():
-    print(f"{key}. {browser.capitalize()}")
+# Main loop to continuously prompt the user
+while True:
+    # Prompt the user to select a browser
+    print("\nSelect a browser:")
+    for key, browser in available_browsers.items():
+        print(f"{key}. {browser.capitalize()}")
+    print("0. Exit")  # Option to exit the program
 
-browser_choice = input("Enter the number for your selected browser: ")
+    browser_choice = input("Enter the number for your selected browser: ")
 
-# Get the selected browser
-browser = get_browser(browser_choice)
+    # Exit the program if user chooses 0
+    if browser_choice == '0':
+        print("Exiting the program.")
+        break
 
-# If the user did not choose the "Source Code" option, open the URL with the selected browser
-if browser and browser_choice != '9':
-    try:
-        print(f"Opening GitHub repository: {github_repo_url}")
-        browser.open_new_tab(github_repo_url)
-    except Exception as e:
-        error_message = f"Error: {str(e)} - Failed to open GitHub URL: {github_repo_url}"
-        print(error_message)
-        log_error(error_message)
+    # Get the selected browser
+    browser = get_browser(browser_choice)
+
+    # If the user did not choose the "Source Code" option, open the URL with the selected browser
+    if browser and browser_choice != '9':
+        try:
+            print(f"Opening GitHub repository: {github_repo_url}")
+            browser.open_new_tab(github_repo_url)
+        except Exception as e:
+            error_message = f"Error: {str(e)} - Failed to open GitHub URL: {github_repo_url}"
+            print(error_message)
+            log_error(error_message)
+
+    # Reset to the beginning of the loop to allow re-selection
